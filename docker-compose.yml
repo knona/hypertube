@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+  hypertube_back:
+    container_name: hypertube_back
+    restart: always
+    build: ./server
+    volumes:
+      - ./data/server/public/images:/usr/src/app/public/images
+      - ./data/server/movies:/usr/src/app/movies
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  hypertube_front:
+    container_name: hypertube_front
+    restart: always
+    build: ./client
+    ports:
+      - "5000:5000"
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"

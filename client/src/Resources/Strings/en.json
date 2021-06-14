@@ -1,0 +1,404 @@
+{
+  "page": {
+    "welcome": {
+      "components": {
+        "ftAuthenticationButton": {
+          "login": "Login with 42",
+          "signin": "Signin with 42"
+        },
+        "googleAuthenticationButton": {
+          "login": "Login with Google",
+          "signin": "Signin with Google"
+        },
+        "loginEmailForm": {
+          "loginTextField": {
+            "placeholder": "Username or email"
+          },
+          "passwordTextField": {
+            "placeholder": "Password"
+          },
+          "loginButton": {
+            "title": "Login"
+          }
+        },
+        "loginModal": {
+          "title": "Login",
+          "or": "or",
+          "loginEmailButton": {
+            "title": "Login with email"
+          },
+          "noAccountDescription": "No account yet?",
+          "signinButton": {
+            "title": "Signin"
+          },
+          "forgotPasswordDescription": "Forgot your password?",
+          "resetPasswordButton": {
+            "title": "Reset password"
+          }
+        },
+        "signinEmailForm": {
+          "firstNameTextField": {
+            "placeholder": "First Name"
+          },
+          "lastNameTextField": {
+            "placeholder": "Last Name"
+          },
+          "usernameTextField": {
+            "placeholder": "Username"
+          },
+          "emailTextField": {
+            "placeholder": "Email"
+          },
+          "passwordTextField": {
+            "placeholder": "Password"
+          },
+          "signinButton": {
+            "title": "Signin"
+          }
+        },
+        "signinModal": {
+          "title": "Signin",
+          "or": "or",
+          "signinEmailButton": {
+            "title": "Signin with email"
+          },
+          "accountDescription": "Already have an account?",
+          "loginButton": {
+            "title": "Login"
+          }
+        },
+        "welcomeTitle": "Welcome to"
+      }
+    },
+    "currentUser": {
+      "components": {
+        "editionEmailForm": {
+          "box": {
+            "title": "Email"
+          },
+          "state": {
+            "success": {
+              "infoMessage": "An email has been sent to your address. Please verify it in order to start using your account."
+            }
+          },
+          "emailTextField": {
+            "placeholder": "Email"
+          },
+          "updateButton": {
+            "title": "Update"
+          }
+        },
+        "editionPersonalInformations": {
+          "box": {
+            "title": "Personnal informations"
+          },
+          "state": {
+            "success": {
+              "infoMessage": "Your informations has been updated."
+            }
+          },
+          "firstNameTextField": {
+            "placeholder": "First Name"
+          },
+          "lastNameTextField": {
+            "placeholder": "Last Name"
+          },
+          "updateButton": {
+            "title": "Update"
+          }
+        },
+        "editionProfilePicture": {
+          "logoutButton": {
+            "title": "Logout"
+          }
+        },
+        "editionSecuritForm": {
+          "box": {
+            "title": "Password"
+          },
+          "state": {
+            "success": {
+              "infoMessage": "Your password has been updated."
+            }
+          },
+          "currentPasswordTextField": {
+            "placeholder": "Current Password"
+          },
+          "newPasswordTextField": {
+            "placeholder": "New Password"
+          },
+          "resetButton": {
+            "title": "Reset Password"
+          }
+        },
+        "editionUsername": {
+          "box": {
+            "title": "Username"
+          },
+          "state": {
+            "success": {
+              "infoMessage": "Your username has been updated."
+            }
+          },
+          "usernameTextField": {
+            "placeholder": "Username"
+          },
+          "updateButton": {
+            "title": "Update"
+          }
+        },
+        "favorites": {
+          "collapse": {
+            "title": "Favorites"
+          },
+          "emptyView": {
+            "description": "No Favorites"
+          },
+          "showMoreButton": {
+            "title": "Show More"
+          }
+        },
+        "watched": {
+          "collapse": {
+            "title": "Watched"
+          },
+          "emptyView": {
+            "description": "No Watched Movies"
+          },
+          "showMoreButton": {
+            "title": "Show More"
+          }
+        }
+      },
+      "state": {
+        "error": {
+          "authenticateButton": {
+            "title": "Authenticate"
+          }
+        }
+      }
+    },
+    "forgotPassword": {
+      "state": {
+        "success": {
+          "infoMessage": "An email has been sent to recover your password."
+        }
+      },
+      "title": "Recover Password",
+      "description": "Use your email to recover your password.",
+      "emailTextField": {
+        "placeholder": "Email"
+      },
+      "recoverButton": {
+        "title": "Recover Password"
+      }
+    },
+    "ftAuthentication": {
+      "retryButton": {
+        "title": "Retry"
+      }
+    },
+    "home": {
+      "segmentedControl": {
+        "popular": "Popular",
+        "topRated": "Top Rated"
+      }
+    },
+    "movie": {
+      "components": {
+        "header": {
+          "released": "Released",
+          "playButton": {
+            "title": "Play"
+          },
+          "favoriteButton": {
+            "isFavorite": "Favorite",
+            "isNotFavorite": "Add to favorites"
+          }
+        },
+        "segmentedSection": {
+          "segmentedControl": {
+            "recommendations": "Recommendations",
+            "comments": "Comments"
+          }
+        },
+        "player": {
+          "moviePlayer": {
+            "noSubtitle": "None"
+          }
+        }
+      },
+      "videoSection": {
+        "title": "Trailers"
+      },
+      "directorSection": {
+        "title": "Director"
+      },
+      "actorsSection": {
+        "title": "Actors"
+      }
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Create a new password to login to your account.",
+      "passwordTextField": {
+        "placeholder": "New Password"
+      },
+      "resetButton": {
+        "title": "Reset Password"
+      }
+    },
+    "search": {
+      "components": {
+        "optionsCollapse": {
+          "collapse": {
+            "title": "Filters"
+          },
+          "genre": "Genre",
+          "minRating": "Min. Stars",
+          "sortBy": "Sort By",
+          "orderBy": "Order By"
+        }
+      },
+      "emptyView": {
+        "description": "No Movie Found"
+      }
+    },
+    "updateEmail": {
+      "title": "Update Email"
+    },
+    "user": {
+      "components": {
+        "favorites": {
+          "collapse": {
+            "title": "Favorites"
+          },
+          "emptyView": {
+            "description": "No Favorites"
+          }
+        },
+        "comments": {
+          "collaspse": {
+            "title": "Comments"
+          },
+          "emptyView": {
+            "description": "No Comments"
+          }
+        }
+      }
+    },
+    "verifyEmail": {
+      "state": {
+        "success": {
+          "infoMessage": "Your email has been verified."
+        }
+      },
+      "sendBackState": {
+        "success": {
+          "infoMessage": "An email has been sent back."
+        }
+      },
+      "title": "Verify Email",
+      "description": "An email has been sent to your address. Please verify it in order to start using your account.",
+      "didntReceivedEmailDescription": "Didn't recevied email?",
+      "sendBackButton": {
+        "title": "Send Email Back"
+      }
+    }
+  },
+  "component": {
+    "commentBubble": {
+      "deleteButton": {
+        "title": "Delete"
+      }
+    },
+    "loadingIndicator": {
+      "loading": "Loading..."
+    },
+    "menu": {
+      "undefinedOption": "Select option"
+    },
+    "navigationBarAuthenticationButton": {
+      "loginButton": {
+        "title": "Login"
+      },
+      "authenticationMenu": {
+        "profile": "Profile",
+        "logout": "Logout"
+      }
+    },
+    "searchField": {
+      "placeholder": "Search"
+    },
+    "watchedBadge": {
+      "watched": "Watched"
+    }
+  },
+  "languages": {
+    "en": "English",
+    "fr": "French"
+  },
+  "movieGenre": {
+    "ACTION": "Action",
+    "ADVENTURE": "Adventure",
+    "ANIMATION": "Animation",
+    "BIOGRAPHY": "Biography",
+    "COMEDY": "Comedy",
+    "CRIME": "Crime",
+    "DOCUMENTARY": "Documentary",
+    "DRAMA": "Drama",
+    "FAMILY": "Family",
+    "FANTASY": "Fantasy",
+    "FILM_NOIR": "Film noir",
+    "HISTORY": "History",
+    "HORROR": "Horror",
+    "MUSIC": "Music",
+    "MUSICAL": "Musical",
+    "MYSTERY": "Mystery",
+    "ROMANCE": "Romance",
+    "SCI_FI": "Sci-fi",
+    "SHORT_FILM": "Short film",
+    "SPORT": "Sport",
+    "SUPERHERO": "Superhero",
+    "THRILLER": "Thriller",
+    "WAR": "War",
+    "WESTERN": "Western"
+  },
+  "searchOrder": {
+    "DESC": "Descending",
+    "ASC": "Ascending"
+  },
+  "searchSort": {
+    "DOWNLOAD_COUNT": "Download count",
+    "LIKE_COUNT": "Like count",
+    "YEAR": "Year",
+    "TITLE": "Title",
+    "RATING": "Rating"
+  },
+  "errors": {
+    "generic": "An error has occured. Please retry.",
+    "server": {
+      "E_USER_NOT_FOUND": "User not found.",
+      "E_VALIDATION": "Failed to validate inputs.",
+      "E_EMAIL_UNICITY": "This email is already used.",
+      "E_TOKEN_INVALID_OR_EXPIRED": "The operation failed because your token has expired. Please retry.",
+      "E_INVALID_FILE_NAME": "The file provided is invalid.",
+      "E_USERNAME_UNICITY": "This username is already used.",
+      "E_INVALID_CREDENTIALS": "The login and password don't match.",
+      "E_USER_NOT_VERIFIED": "Your account has not been verified.",
+      "E_USER_ALREADY_VERIFIED": "Your account has already been verified.",
+      "E_INVALID_FILE_EXTENSION": "The image extension must be jpg, jpeg or png.",
+      "E_INVALID_FILE_MIMETYPE": "The image is not valid.",
+      "E_OAUTH_42": "A problem occured whith 42 authentification.",
+      "E_OAUTH_GOOGLE": "A problem occured whith Google authentification."
+    },
+    "validator": {
+      "invalidUsernameLength": "Your username should contains between 3 and 25 characters.",
+      "invalidUsernameCharacters": "Your username should only contains alpha-numeric characters or \"_\".",
+      "invalidNameLength": "Names should contains between 1 and 50 characters.",
+      "invalidPasswordLength": "Your password should contains between 8 and 50 characters.",
+      "invalidPasswordCharacters": "Password should contains at least one letter, one capital letter, and one number.",
+      "invalidEmail": "Invalid email address."
+    }
+  }
+}

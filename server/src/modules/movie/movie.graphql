@@ -1,0 +1,147 @@
+type Movie {
+  tmdbId: Int!
+  posterUrl: String
+  backdropUrl: String
+  overview: String!
+  releaseDate: String!
+  genres: [String]!
+  originalTitle: String!
+  originalLanguage: String!
+  title: String!
+  popularity: Float!
+  voteCount: Int!
+  voteAverage: Float!
+  isFavorite: Boolean!
+  isWatched: Boolean!
+}
+
+type YoutubeTrailer {
+  key: String!
+  name: String!
+  size: Int!
+}
+
+type Torrent {
+  hash: String!
+  quality: String!
+  seeds: Int!
+  peers: Int!
+  size: String!
+}
+
+type Actor {
+  name: String!
+  popularity: Float!
+  profileUrl: String
+  character: String!
+}
+
+type Director {
+  name: String!
+  popularity: Float!
+  profileUrl: String
+}
+
+type DetailedMovie {
+  tmdbId: Int!
+  imdbId: String!
+  budget: Int!
+  posterUrl: String
+  backdropUrl: String
+  overview: String
+  releaseDate: String!
+  genres: [String]!
+  originalTitle: String!
+  originalLanguage: String!
+  title: String!
+  popularity: Float!
+  voteCount: Int!
+  voteAverage: Float!
+  tagline: String
+  runtime: Int
+  videos: [YoutubeTrailer]!
+  torrents: [Torrent]!
+  actors: [Actor]!
+  director: Director
+  comments: [Comment]!
+  isFavorite: Boolean!
+  isWatched: Boolean!
+}
+
+enum Language {
+  EN
+  FR
+}
+
+enum MovieGenre {
+  ACTION
+  ADVENTURE
+  ANIMATION
+  BIOGRAPHY
+  COMEDY
+  CRIME
+  DOCUMENTARY
+  DRAMA
+  FAMILY
+  FANTASY
+  FILM_NOIR
+  HISTORY
+  HORROR
+  MUSIC
+  MUSICAL
+  MYSTERY
+  ROMANCE
+  SCI_FI
+  SHORT_FILM
+  SPORT
+  SUPERHERO
+  THRILLER
+  WAR
+  WESTERN
+}
+
+enum MovieSort {
+  DOWNLOAD_COUNT
+  LIKE_COUNT
+  YEAR
+  TITLE
+  RATING
+}
+
+enum MovieSortOrder {
+  DESC
+  ASC
+}
+
+input FiltersInput {
+  queryTerm: String!
+  genre: MovieGenre
+  minRating: Int
+  sortBy: MovieSort = DOWNLOAD_COUNT
+  orderBy: MovieSortOrder = DESC
+}
+
+type Query {
+  popular(page: Int!, language: Language): [Movie]
+  topRated(page: Int!, language: Language): [Movie]
+  recommendations(page: Int!, tmdbId: Int!, language: Language): [Movie]
+  search(page: Int!, filters: FiltersInput!, language: Language): [Movie]
+  movie(tmdbId: Int!, language: Language): DetailedMovie
+}
+
+type FavoriteMovieAttribute {
+  tmdbId: Int!
+  isFavorite: Boolean!
+}
+
+type WatchedMovieAttribute {
+  tmdbId: Int!
+  isWatched: Boolean!
+}
+
+type Mutation {
+  addFavoriteMovie(tmdbId: Int!): FavoriteMovieAttribute
+  removeFavoriteMovie(tmdbId: Int!): FavoriteMovieAttribute
+  addWatchedMovie(tmdbId: Int!): WatchedMovieAttribute
+  removeWatchedMovie(tmdbId: Int!): WatchedMovieAttribute
+}

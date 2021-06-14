@@ -1,0 +1,12 @@
+export const E_VALIDATION: string = 'E_VALIDATION'; // bad user input
+export const E_USERNAME_UNICITY: string = 'E_USERNAME_UNICITY'; // register with an username which is already used
+export const E_EMAIL_UNICITY: string = 'E_EMAIL_UNICITY'; // register with an email which is already used
+export const E_USER_NOT_FOUND: string = 'E_USER_NOT_FOUND'; // user not found
+export const E_INVALID_CREDENTIALS: string = 'E_INVALID_CREDENTIALS'; // loign failed because email-username / password pair is invalid
+export const E_USER_NOT_VERIFIED: string = 'E_USER_NOT_VERIFIED'; // login failed because user is not verified
+export const E_USER_ALREADY_VERIFIED: string = 'E_USER_ALREADY_VERIFIED'; // user verification failed because user is already verified
+export const E_TOKEN_INVALID_OR_EXPIRED: string = 'E_TOKEN_INVALID_OR_EXPIRED'; // the provided token has expired or it is invalid
+export const E_INVALID_FILE_EXTENSION: string = 'E_INVALID_FILE_EXTENSION'; // the file's extension does not match the accepted extensions
+export const E_INVALID_FILE_MIMETYPE: string = 'E_INVALID_FILE_MIMETYPE'; // the file's mimetype does not match the accepted mimetypes
+export const E_OAUTH_42: string = 'E_OAUTH_42'; // register / login failed with 42 oauth
+export const E_OAUTH_GOOGLE: string = 'E_OAUTH_GOOGLE'; // register / login failed with google oauth

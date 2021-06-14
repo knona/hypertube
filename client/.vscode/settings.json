@@ -1,0 +1,11 @@
+{
+  "svelte.plugin.typescript.enable": true,
+  "eslint.validate": ["javascript", "svelte"],
+  "[svelte]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "i18n-ally.localesPaths": [
+    "src/Resources/Strings"
+  ],
+  "i18n-ally.keystyle": "nested"
+}

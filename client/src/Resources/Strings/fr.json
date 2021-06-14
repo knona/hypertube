@@ -1,0 +1,404 @@
+{
+  "page": {
+    "welcome": {
+      "components": {
+        "ftAuthenticationButton": {
+          "login": "Connexion 42",
+          "signin": "Inscription 42"
+        },
+        "googleAuthenticationButton": {
+          "login": "Connexion Google",
+          "signin": "Inscription Google"
+        },
+        "loginEmailForm": {
+          "loginTextField": {
+            "placeholder": "Nom d'utilisateur ou email"
+          },
+          "passwordTextField": {
+            "placeholder": "Mot de passe"
+          },
+          "loginButton": {
+            "title": "Connexion"
+          }
+        },
+        "loginModal": {
+          "title": "Connexion",
+          "or": "ou",
+          "loginEmailButton": {
+            "title": "Connexion email"
+          },
+          "noAccountDescription": "Pas encore inscrit ?",
+          "signinButton": {
+            "title": "Inscription"
+          },
+          "forgotPasswordDescription": "Mot de passe oublié ?",
+          "resetPasswordButton": {
+            "title": "Réinitialiser votre mot de passe"
+          }
+        },
+        "signinEmailForm": {
+          "firstNameTextField": {
+            "placeholder": "Prénom"
+          },
+          "lastNameTextField": {
+            "placeholder": "Nom"
+          },
+          "usernameTextField": {
+            "placeholder": "Nom d'utilisateur"
+          },
+          "emailTextField": {
+            "placeholder": "Email"
+          },
+          "passwordTextField": {
+            "placeholder": "Mot de passe"
+          },
+          "signinButton": {
+            "title": "Inscription"
+          }
+        },
+        "signinModal": {
+          "title": "Inscription",
+          "or": "ou",
+          "signinEmailButton": {
+            "title": "Inscription email"
+          },
+          "accountDescription": "Déjà inscrit ?",
+          "loginButton": {
+            "title": "Connexion"
+          }
+        },
+        "welcomeTitle": "Bienvenue sur"
+      }
+    },
+    "currentUser": {
+      "components": {
+        "editionEmailForm": {
+          "box": {
+            "title": "Email"
+          },
+          "state": {
+            "success": {
+              "infoMessage": "Un email vous a été envoyé. Vérifiez votre compte pour continuer à utiliser Hypertube."
+            }
+          },
+          "emailTextField": {
+            "placeholder": "Email"
+          },
+          "updateButton": {
+            "title": "Mettre à jour"
+          }
+        },
+        "editionPersonalInformations": {
+          "box": {
+            "title": "Informations personnelles"
+          },
+          "state": {
+            "success": {
+              "infoMessage": "Vos informations ont été mises à jour."
+            }
+          },
+          "firstNameTextField": {
+            "placeholder": "Prénom"
+          },
+          "lastNameTextField": {
+            "placeholder": "Nom"
+          },
+          "updateButton": {
+            "title": "Mettre à jour"
+          }
+        },
+        "editionProfilePicture": {
+          "logoutButton": {
+            "title": "Déconnexion"
+          }
+        },
+        "editionSecuritForm": {
+          "box": {
+            "title": "Mot de passe"
+          },
+          "state": {
+            "success": {
+              "infoMessage": "Votre mot de passe a été mis à jour."
+            }
+          },
+          "currentPasswordTextField": {
+            "placeholder": "Mot de passe actuel"
+          },
+          "newPasswordTextField": {
+            "placeholder": "Nouveau mot de passe"
+          },
+          "resetButton": {
+            "title": "Réinitaliser votre mot de passe"
+          }
+        },
+        "editionUsername": {
+          "box": {
+            "title": "Nom d'utilisateur"
+          },
+          "state": {
+            "success": {
+              "infoMessage": "Votre nom d'utilisateur a été mis à jour."
+            }
+          },
+          "usernameTextField": {
+            "placeholder": "Nom d'utilisateur"
+          },
+          "updateButton": {
+            "title": "Mettre à jour"
+          }
+        },
+        "favorites": {
+          "collapse": {
+            "title": "Favoris"
+          },
+          "emptyView": {
+            "description": "Aucun favoris"
+          },
+          "showMoreButton": {
+            "title": "Voir plus"
+          }
+        },
+        "watched": {
+          "collapse": {
+            "title": "Vus"
+          },
+          "emptyView": {
+            "description": "Aucun film vu"
+          },
+          "showMoreButton": {
+            "title": "Voir plus"
+          }
+        }
+      },
+      "state": {
+        "error": {
+          "authenticateButton": {
+            "title": "Connexion"
+          }
+        }
+      }
+    },
+    "forgotPassword": {
+      "state": {
+        "success": {
+          "infoMessage": "Un email vous a été envoyé pour réinitialiser votre mot de passe."
+        }
+      },
+      "title": "Réinitialiser votre mot de passe",
+      "description": "Un email va vous être envoyé pour réinitialiser votre mot de passe.",
+      "emailTextField": {
+        "placeholder": "Email"
+      },
+      "recoverButton": {
+        "title": "Réinitialiser votre mot de passe"
+      }
+    },
+    "ftAuthentication": {
+      "retryButton": {
+        "title": "Réessayer"
+      }
+    },
+    "home": {
+      "segmentedControl": {
+        "popular": "Populaire",
+        "topRated": "Classement"
+      }
+    },
+    "movie": {
+      "components": {
+        "header": {
+          "released": "Sorti le",
+          "playButton": {
+            "title": "Lire"
+          },
+          "favoriteButton": {
+            "isFavorite": "Favoris",
+            "isNotFavorite": "Ajouter aux favoris"
+          }
+        },
+        "segmentedSection": {
+          "segmentedControl": {
+            "recommendations": "Recommandations",
+            "comments": "Commentaires"
+          }
+        },
+        "player": {
+          "moviePlayer": {
+            "noSubtitle": "Aucun"
+          }
+        }
+      },
+      "videoSection": {
+        "title": "Bande-annonces"
+      },
+      "directorSection": {
+        "title": "Réalisateur"
+      },
+      "actorsSection": {
+        "title": "Acteurs"
+      }
+    },
+    "resetPassword": {
+      "title": "Réinitialiser votre mot de passe",
+      "description": "Entrez un nouveau mot de passe",
+      "passwordTextField": {
+        "placeholder": "Nouveau mot de passe"
+      },
+      "resetButton": {
+        "title": "Réinitialiser votre mot de passe"
+      }
+    },
+    "search": {
+      "components": {
+        "optionsCollapse": {
+          "collapse": {
+            "title": "Filtres"
+          },
+          "genre": "Genre",
+          "minRating": "Note min.",
+          "sortBy": "Tri",
+          "orderBy": "Ordre"
+        }
+      },
+      "emptyView": {
+        "description": "Aucun résultat"
+      }
+    },
+    "updateEmail": {
+      "title": "Mise à jour de votre email"
+    },
+    "user": {
+      "components": {
+        "favorites": {
+          "collapse": {
+            "title": "Favoris"
+          },
+          "emptyView": {
+            "description": "Aucun favoris"
+          }
+        },
+        "comments": {
+          "collaspse": {
+            "title": "Commentaires"
+          },
+          "emptyView": {
+            "description": "Aucun commentaire"
+          }
+        }
+      }
+    },
+    "verifyEmail": {
+      "state": {
+        "success": {
+          "infoMessage": "Votre email a été vérifié."
+        }
+      },
+      "sendBackState": {
+        "success": {
+          "infoMessage": "Un email vous a été envoyé."
+        }
+      },
+      "title": "Vérifiez votre email",
+      "description": "Un email vous a été envoyé. Vous devez vérifier votre compte pour commencer à utiliser Hypertube.",
+      "didntReceivedEmailDescription": "Aucun email reçu ?",
+      "sendBackButton": {
+        "title": "Renvoyer un email"
+      }
+    }
+  },
+  "component": {
+    "commentBubble": {
+      "deleteButton": {
+        "title": "Supprimer"
+      }
+    },
+    "loadingIndicator": {
+      "loading": "Chargement..."
+    },
+    "menu": {
+      "undefinedOption": "Non défini"
+    },
+    "navigationBarAuthenticationButton": {
+      "loginButton": {
+        "title": "Connexion"
+      },
+      "authenticationMenu": {
+        "profile": "Profil",
+        "logout": "Déconnexion"
+      }
+    },
+    "searchField": {
+      "placeholder": "Rechercher"
+    },
+    "watchedBadge": {
+      "watched": "Vu"
+    }
+  },
+  "languages": {
+    "en": "Anglais",
+    "fr": "Français"
+  },
+  "movieGenre": {
+    "ACTION": "Action",
+    "ADVENTURE": "Aventure",
+    "ANIMATION": "Animation",
+    "BIOGRAPHY": "Biographie",
+    "COMEDY": "Commédie",
+    "CRIME": "Crime",
+    "DOCUMENTARY": "Documentaire",
+    "DRAMA": "Drame",
+    "FAMILY": "Famille",
+    "FANTASY": "Fantaisie",
+    "FILM_NOIR": "Film noir",
+    "HISTORY": "Histoire",
+    "HORROR": "Horreur",
+    "MUSIC": "Musique",
+    "MUSICAL": "Musical",
+    "MYSTERY": "Mystère",
+    "ROMANCE": "Romance",
+    "SCI_FI": "Science-Fiction",
+    "SHORT_FILM": "Court métrage",
+    "SPORT": "Sport",
+    "SUPERHERO": "Super héros",
+    "THRILLER": "Thriller",
+    "WAR": "Guerre",
+    "WESTERN": "Western"
+  },
+  "searchOrder": {
+    "DESC": "Décroissant",
+    "ASC": "Croissant"
+  },
+  "searchSort": {
+    "DOWNLOAD_COUNT": "Téléchargements",
+    "LIKE_COUNT": "J'aimes",
+    "YEAR": "Année",
+    "TITLE": "Titre",
+    "RATING": "Note"
+  },
+  "errors": {
+    "generic": "Une erreur s'est produite. Veuillez réessayer.",
+    "server": {
+      "E_USER_NOT_FOUND": "L'utilisateur n'existe pas.",
+      "E_VALIDATION": "Échec lors de la validation des paramètres.",
+      "E_EMAIL_UNICITY": "Cette adresse email est déjà utilisée.",
+      "E_TOKEN_INVALID_OR_EXPIRED": "Le token est invalide ou a expiré.",
+      "E_INVALID_FILE_NAME": "Fichier invalide.",
+      "E_USERNAME_UNICITY": "Cet nom d'utilisateur est déjà utilisé.",
+      "E_INVALID_CREDENTIALS": "Mot de passe invalide.",
+      "E_USER_NOT_VERIFIED": "Votre compte n'a pas été vérifié.",
+      "E_USER_ALREADY_VERIFIED": "Votre compte a déjà été vérifié.",
+      "E_INVALID_FILE_EXTENSION": "L'extension de l'image doit être jpg, jpeg ou png.",
+      "E_INVALID_FILE_MIMETYPE": "Le fichier est invalide.",
+      "E_OAUTH_42": "Un problème est survenu lors de l'authentification avec 42.",
+      "E_OAUTH_GOOGLE": "Un problème est survenu lors de l'authentification avec Google."
+    },
+    "validator": {
+      "invalidUsernameLength": "Le nom d'utilisateur doit contenir entre 3 et 25 caractères.",
+      "invalidUsernameCharacters": "Le nom d'utilisateur doit être composé uniquement de caractères alphanumériques ou de \"_\"",
+      "invalidNameLength": "Prénoms et noms doivent contenir entre 1 et 50 caractères.",
+      "invalidPasswordLength": "Le mot de passe doit contenir entre 8 et 50 caractères.",
+      "invalidPasswordCharacters": "Le mot de passe doit contenir au moins une minuscule, une majuscule et un chiffre.",
+      "invalidEmail": "L'email est invalide."
+    }
+  }
+}

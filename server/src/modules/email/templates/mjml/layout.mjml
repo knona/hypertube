@@ -1,0 +1,43 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-font href="https://fonts.googleapis.com/css?family=Ubuntu" name="Ubuntu"></mj-font>
+      <mj-text color="black" font-size="12px"></mj-text>
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-include path="./header.mjml" />
+    <mj-section background-color="#fff">
+      <mj-column>
+        <mj-text align="center">
+          <h2 style="text-transform: uppercase; font-size: 18px;"><%= title %></h2>
+        </mj-text>
+        <mj-divider border-color="#3498DB"></mj-divider>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+      <mj-column>
+        <mj-text align="center">
+          <%- content %>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <% if (locals.url) { %>
+    <mj-section background-color="#fff" padding="0">
+      <mj-column>
+        <mj-button font-family="Helvetica" background-color="#3498DB" color="white" href="<%=url%>">
+          <%= buttonText %>
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+      <mj-column>
+        <mj-text align="center" color="brown">
+          <%= url %>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <% } %> 
+    <mj-include path="./footer.mjml" />
+  </mj-body>
+</mjml>

@@ -1,0 +1,28 @@
+export enum MovieGenre {
+  ACTION = 'ACTION',
+  ADVENTURE = 'ADVENTURE',
+  ANIMATION = 'ANIMATION',
+  BIOGRAPHY = 'BIOGRAPHY',
+  COMEDY = 'COMEDY',
+  CRIME = 'CRIME',
+  DOCUMENTARY = 'DOCUMENTARY',
+  DRAMA = 'DRAMA',
+  FAMILY = 'FAMILY',
+  FANTASY = 'FANTASY',
+  FILM_NOIR = 'FILM_NOIR',
+  HISTORY = 'HISTORY',
+  HORROR = 'HORROR',
+  MUSIC = 'MUSIC',
+  MUSICAL = 'MUSICAL',
+  MYSTERY = 'MYSTERY',
+  ROMANCE = 'ROMANCE',
+  SCI_FI = 'SCI_FI',
+  SHORT_FILM = 'SHORT_FILM',
+  SPORT = 'SPORT',
+  SUPERHERO = 'SUPERHERO',
+  THRILLER = 'THRILLER',
+  WAR = 'WAR',
+  WESTERN = 'WESTERN'
+}
+
+export const AllMovieGenre: MovieGenre[] = Object.values(MovieGenre);

@@ -1,0 +1,18 @@
+type Comment {
+  id: String!
+  tmdbId: Int!
+  author: User!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input CreateCommentInput {
+  tmdbId: Int!
+  content: String!
+}
+
+type Mutation {
+  createComment(input: CreateCommentInput!): Comment
+  deleteComment(id: String!): Void
+}

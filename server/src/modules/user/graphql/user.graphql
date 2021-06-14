@@ -1,0 +1,35 @@
+type User {
+  id: String!
+  username: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  pictureUrl: String
+  comments: [Comment]!
+  favoriteMovies(page: Int!, language: Language): [DetailedMovie]!
+  watchedMovies(page: Int!, language: Language): [DetailedMovie]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  me: User
+  user(id: String!): User
+}
+
+input UpdatePasswordInput {
+  oldPassword: String!
+  newPassword: String!
+}
+
+input UpdateUserInput {
+  firstName: String!
+  lastName: String!
+}
+
+type Mutation {
+  updatePassword(input: UpdatePasswordInput!): Void
+  updateUsername(username: String!): User
+  updateUser(user: UpdateUserInput!): User
+  upsertProfilPicture(image: Upload!): User
+}

@@ -1,0 +1,31 @@
+input RegisterInput {
+  username: String!
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+input LoginInput {
+  identifier: String!
+  password: String!
+}
+
+type LoginResponse {
+  token: Token!
+  user: User!
+}
+
+type Mutation {
+  register(user: RegisterInput!): Void
+  login(credentials: LoginInput!): LoginResponse
+  login42(code: String!): LoginResponse
+  loginGoogle(code: String!): LoginResponse
+  refresh: Token
+  generateVerificationToken(email: String!): Void
+  generateResetPasswordToken(email: String!): Void
+  generateEmailUpdateToken(email: String!): Void
+  resetPassword(username: String!, password: String!, token: String!): LoginResponse
+  verify(username: String!, token: String!): LoginResponse
+  updateEmail(username: String!, token: String!): User
+}
