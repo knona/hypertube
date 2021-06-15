@@ -15,6 +15,12 @@ You can install Hypertube very easily by executing the following command at the 
 docker-compose up
 ```
 
+Then you can reach the app with the following url:
+
+```
+http://localhost:5000
+```
+
 ## Technologies
 
 This project is made entirely using [Typescript](https://www.typescriptlang.org) which dramatically improves Javascript.
