@@ -68,9 +68,13 @@
 
   function checkAvailableLanguages(): void {
     Object.values(Language).forEach(async language => {
-      const res = await fetch(getSubtitleUrl(language));
-      if (res.status === 200) {
-        availableLanguages = [...availableLanguages, language];
+      try {
+        const res = await fetch(getSubtitleUrl(language));
+        if (res.status === 200) {
+          availableLanguages = [...availableLanguages, language];
+        }
+      } catch (_error) {
+        //
       }
     });
   }
