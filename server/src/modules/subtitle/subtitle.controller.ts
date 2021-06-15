@@ -1,4 +1,4 @@
-import { Controller, Get, Header, HttpStatus, Inject, Query, Res } from '@nestjs/common';
+import { Controller, Get, Header, Inject, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import pump from 'pump';
 import { Writable } from 'stream';
@@ -19,6 +19,6 @@ export class SubtitleController {
     @Query('language') language: Language
   ): Promise<void> {
     const stream: Writable = await this.subtitleService.getSubtitle(imdbId, language);
-    pump(stream, res, () => res.status(HttpStatus.NOT_FOUND).send());
+    pump(stream, res);
   }
 }
