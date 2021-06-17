@@ -2,6 +2,7 @@
   import { _ } from 'svelte-i18n';
   import { fade, scale } from 'svelte/transition';
   import { currentUserStore } from '../../../Modules/Store/CurrentUser/CurrentUserStore';
+  import NavigationBarLanguageMenu from '../../Components/NavigationBarLanguageMenu/NavigationBarLanguageMenu.svelte';
   import Redirect from '../../Components/Redirect/Redirect.svelte';
   import LoginModal from './Components/LoginModal.svelte';
   import SigninModal from './Components/SigninModal.svelte';
@@ -47,12 +48,16 @@
         />
       </div>
 
-      <div in:fade={{ duration: 2000, delay: 4000 }} class="pt-5 z-10 v-stack items-center space-y-2">
+      <div in:fade={{ duration: 2000, delay: 4000 }} class="pt-5 z-10 v-stack items-center space-y-4">
         {#if authenticationType === AuthenticationType.login}
           <LoginModal bind:authenticationType />
         {:else if authenticationType === AuthenticationType.signin}
           <SigninModal bind:authenticationType />
         {/if}
+
+        <div class="ml-4">
+          <NavigationBarLanguageMenu />
+        </div>
       </div>
     </div>
   </div>
