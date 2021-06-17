@@ -83,12 +83,14 @@
       <AuthenticatedRoute path="/profile" redirectUrl="/auth">
         <CurrentUserPage />
       </AuthenticatedRoute>
+      <AuthenticatedRoute path="/home" redirectUrl="/auth">
+        <HomePage />
+      </AuthenticatedRoute>
       <Route path="/auth/42"><Page><FtAuthenticationPage /></Page></Route>
       <Route path="/auth/verify"><Page><VerifyEmailPage /></Page></Route>
       <Route path="/auth/forgot"><Page><ForgotPasswordPage /></Page></Route>
       <Route path="/auth/reset"><Page><ResetPasswordPage /></Page></Route>
       <Route path="/auth/updateEmail"><Page><UpdateEmailPage /></Page></Route>
-      <Route path="/home"><HomePage /></Route>
       <Route path="/"><WelcomePage /></Route>
       <Route path="*"><Redirect to="/" /></Route>
     </Router>

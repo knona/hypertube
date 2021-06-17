@@ -30,8 +30,8 @@
     .pipe(
       tap(stringValue => {
         if (stringValue.length === 0) {
-          errorType = undefined
-          isValid = false
+          errorType = undefined;
+          isValid = false;
         }
       }),
       filter(stringValue => !!stringValue),
