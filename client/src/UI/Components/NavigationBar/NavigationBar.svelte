@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { currentUserStore } from '../../../Modules/Store/CurrentUser/CurrentUserStore';
+
+  import { userStore } from '../../../Modules/Store/User/UserStore';
   import NavigationBarAuthenticationButton from '../NavigationBarAuthenticationButton/NavigationBarAuthenticationButton.svelte';
   import NavigationBarLanguageMenu from '../NavigationBarLanguageMenu/NavigationBarLanguageMenu.svelte';
   import SearchField from '../SearchField/SearchField.svelte';
@@ -12,7 +15,11 @@
 >
   <div class="w-full my-grid">
     <div class="h-stack w-full"><Logo /></div>
-    <SearchField bind:search />
+    {#if $currentUserStore.user}
+      <SearchField bind:search />
+    {:else}
+      <div />
+    {/if}
     <div class="w-full h-stack items-center justify-end">
       <div><NavigationBarLanguageMenu /></div>
       <NavigationBarAuthenticationButton />
@@ -32,7 +39,11 @@
       <NavigationBarAuthenticationButton />
     </div>
   </div>
-  <SearchField bind:search />
+  {#if $currentUserStore.user}
+    <SearchField bind:search />
+  {:else}
+    <div />
+  {/if}
 </nav>
 
 <style>
