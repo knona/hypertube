@@ -1,6 +1,6 @@
 <script lang="ts">
   import { BehaviorSubject, Subject } from 'rxjs';
-  import { debounceTime, filter, map, skip, takeUntil, tap } from 'rxjs/operators';
+  import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
   import { onDestroy } from 'svelte';
   import { _ } from 'svelte-i18n';
   import type { Optional, Validator } from '../../../Shared/Types';
@@ -28,8 +28,13 @@
 
   textBehavior
     .pipe(
+      tap(stringValue => {
+        if (stringValue.length === 0) {
+          errorType = undefined
+          isValid = false
+        }
+      }),
       filter(stringValue => !!stringValue),
-      skip(2),
       map(fieldError),
       tap(error => (isValid = error === undefined)),
       debounceTime(500),
