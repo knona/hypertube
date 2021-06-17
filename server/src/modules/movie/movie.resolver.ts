@@ -57,7 +57,6 @@ export class MovieResolver {
 
   @Query()
   @Resolver('Movie')
-  @Public()
   public async search(
     @Args('page') page: number,
     @Args('filters') filters: FiltersInput,
