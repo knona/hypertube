@@ -97,7 +97,7 @@
           <StarRating rating={movie.voteAverage} size={15} />
         </div>
 
-        <div class="hidden md:block">
+        <div class="flex-shrink-0 hidden md:block">
           <div class="v-stack items-center space-y-2">
             <MenuButton
               title={$_('page.movie.components.header.playButton.title')}
@@ -105,6 +105,7 @@
               items={playMenuItems()}
               menuWidth={60}
               menuPosition={MenuButtonPosition.bottomRight}
+              disabled={movie.torrents.length === 0}
               on:itemSelection={play}
             />
             <button class="appearence-none bg-transparent border-none" on:click={favoriteClicked}>
@@ -145,6 +146,7 @@
               items={playMenuItems()}
               menuWidth={60}
               menuPosition={MenuButtonPosition.bottomRight}
+              disabled={movie.torrents.length === 0}
               on:itemSelection={play}
             />
             <button class="appearence-none bg-transparent border-none" on:click={favoriteClicked}>

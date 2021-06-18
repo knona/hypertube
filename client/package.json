@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public -s -q --no-clear",
+    "start": "sirv public -s --no-clear",
     "validate": "svelte-check",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.svelte\"",
     "lint": "eslint \"src/**/*.{ts,svelte}\" --fix"

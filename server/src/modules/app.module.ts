@@ -15,7 +15,7 @@ import { UserModule } from './user/user.module';
 @Module({
   imports: [
     GQLModule,
-    MongooseModule.forRoot('mongodb://mongo/hypertube', { useCreateIndex: true, useFindAndModify: false }),
+    MongooseModule.forRoot('mongodb://localhost/hypertube', { useCreateIndex: true, useFindAndModify: false }),
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', '..', 'public'), renderPath: '/images' }),
     MovieModule,
     UserModule,

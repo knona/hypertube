@@ -15,6 +15,7 @@
   export let backgroundColor: string = 'ctrl-bg';
   export let textColor: string = 'black';
   export let spacing: number = 1;
+  export let disabled: boolean = false;
   export let horizontalPadding: number = 8;
   export let verticalPadding: number = 1.5;
   export let menuWidth: number = 72;
@@ -69,10 +70,11 @@
       {verticalPadding}
       scaleEffect={false}
       {textStyle}
-      on:click={() => (isMenuVisible = true)}
+      {disabled}
+      on:click={() => (isMenuVisible = !isMenuVisible)}
     />
   {:else if buttonType === MenuButtonType.normal}
-    <Button {title} {icon} {spacing} on:click={() => (isMenuVisible = true)} />
+    <Button {title} {icon} {spacing} {disabled} on:click={() => (isMenuVisible = !isMenuVisible)} />
   {/if}
 
   {#if isMenuVisible}

@@ -26,7 +26,9 @@
   class={`px-${horizontalPadding} py-${verticalPadding} text-${textColor}
   text-sm font-semibold tracking-wide bg-${backgroundColor} rounded-full
   appearance-none border-none active:opacity-40 disabled:opacity-20 disabled:bg-opacity-20 
-  ransition-transorm duration-300 ${scaleEffect ? 'transform hover:scale-105' : ''} focus:outline-gray-50`}
+  ransition-transorm duration-300 ${disabled ? 'cursor-default' : 'cursor-pointer'} ${
+    scaleEffect && !disabled ? 'transform hover:scale-105' : ''
+  } focus:outline-gray-50`}
   {disabled}
   on:click={click}
 >

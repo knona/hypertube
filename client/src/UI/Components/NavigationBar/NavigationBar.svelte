@@ -1,7 +1,5 @@
 <script lang="ts">
   import { currentUserStore } from '../../../Modules/Store/CurrentUser/CurrentUserStore';
-
-  import { userStore } from '../../../Modules/Store/User/UserStore';
   import NavigationBarAuthenticationButton from '../NavigationBarAuthenticationButton/NavigationBarAuthenticationButton.svelte';
   import NavigationBarLanguageMenu from '../NavigationBarLanguageMenu/NavigationBarLanguageMenu.svelte';
   import SearchField from '../SearchField/SearchField.svelte';
@@ -22,7 +20,9 @@
     {/if}
     <div class="w-full h-stack items-center justify-end">
       <div><NavigationBarLanguageMenu /></div>
-      <NavigationBarAuthenticationButton />
+      {#if $currentUserStore.user}
+        <NavigationBarAuthenticationButton />
+      {/if}
     </div>
   </div>
 </nav>
@@ -36,7 +36,9 @@
       <div>
         <NavigationBarLanguageMenu />
       </div>
-      <NavigationBarAuthenticationButton />
+      {#if $currentUserStore.user}
+        <NavigationBarAuthenticationButton />
+      {/if}
     </div>
   </div>
   {#if $currentUserStore.user}

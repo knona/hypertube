@@ -4,17 +4,11 @@
   import { _ } from 'svelte-i18n';
   import Authentication from '../../../Modules/Authentication/Authentication';
   import Navigation from '../../../Modules/Navigation/Navigation';
-  import { currentUserStore } from '../../../Modules/Store/CurrentUser/CurrentUserStore';
   import { IconType } from '../Icon/Models/IconType';
   import type { MenuItem } from '../Menu/Models/MenuItem';
   import MenuButton from '../MenuButton/MenuButton.svelte';
   import { MenuButtonPosition } from '../MenuButton/Models/MenuButtonPosition';
-  import RoundedButton from '../RoundedButton/RoundedButton.svelte';
   import { NavigationBarAuthenticationButtonType } from './Models/NavigationBarAuthenticationButtonType';
-
-  function goToAuthentication(): void {
-    Navigation.navigateTo('/');
-  }
 
   function menuItems(): MenuItem<NavigationBarAuthenticationButtonType>[] {
     return [
@@ -57,23 +51,11 @@
   }
 </script>
 
-{#if $currentUserStore.user}
-  <MenuButton
-    icon={IconType.userFill}
-    items={menuItems()}
-    menuPosition={MenuButtonPosition.bottomRight}
-    menuWidth={52}
-    textStyle="max-w-0 md:max-w-xs truncate"
-    on:itemSelection={menuItemSelected}
-  />
-{:else}
-  <div class="hidden md:block">
-    <RoundedButton
-      title={$_('component.navigationBarAuthenticationButton.loginButton.title')}
-      on:click={goToAuthentication}
-    />
-  </div>
-  <div class="md:hidden">
-    <RoundedButton icon={IconType.userFill} on:click={goToAuthentication} />
-  </div>
-{/if}
+<MenuButton
+  icon={IconType.userFill}
+  items={menuItems()}
+  menuPosition={MenuButtonPosition.bottomRight}
+  menuWidth={52}
+  textStyle="max-w-0 md:max-w-xs truncate"
+  on:itemSelection={menuItemSelected}
+/>
