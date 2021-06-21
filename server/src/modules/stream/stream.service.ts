@@ -138,7 +138,7 @@ export class StreamService implements OnModuleInit {
       const engine: TorrentEngine = torrentStream(magnet, { trackers, uploads: 0, path: this.moviesFolder });
       this.engines[hash] = { engine, ready: false, movie: null };
     }
-    if (!this.engines[hash] || !this.engines[hash].ready) {
+    if (!this.engines[hash].ready) {
       await this.setMovie(hash);
     }
     const movie: TorrentFile = this.engines[hash].movie;
