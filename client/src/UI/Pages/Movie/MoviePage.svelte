@@ -4,17 +4,17 @@
   import type { ServerError } from '../../../Models/Server/Errors/ServerError';
   import type { Torrent } from '../../../Models/Torrent';
   import MovieManager from '../../../Modules/Movie/MovieManager';
-  import Navigation from '../../../Modules/Navigation/Navigation';
   import { componentState } from '../../../Modules/Store/ComponentState/ComponentStateStore';
   import { ComponentStateType } from '../../../Modules/Store/ComponentState/Models/ComponentStateType';
   import type { State } from '../../../Modules/Store/ComponentState/Models/State';
   import { movieStore } from '../../../Modules/Store/Movie/MovieStore';
   import type { MovieStore } from '../../../Modules/Store/Movie/MovieStore.interface';
   import { preferences } from '../../../Modules/Store/Preference/PreferenceStore';
-  import EmptyView from '../../Components/EmptyView/EmptyView.svelte';
   import Footer from '../../Components/Footer/Footer.svelte';
   import LoadingIndicator from '../../Components/LoadingIndicator/LoadingIndicator.svelte';
-  import RoundedButton from '../../Components/RoundedButton/RoundedButton.svelte';
+  import InfoMessage from './../../Components/InfoMessage/InfoMessage.svelte';
+  import { InfoMessageType } from './../../Components/InfoMessage/Models/InfoMessageType';
+  import LocalizedServerError from './../../Components/LocalizedServerError/LocalizedServerError.svelte';
   import MovieCharacter from './Components/MovieCharacter.svelte';
   import MovieHeader from './Components/MovieHeader.svelte';
   import MovieSection from './Components/MovieSection.svelte';
@@ -39,10 +39,6 @@
       .catch(state.setError);
   }
 
-  function goToHome(): void {
-    Navigation.navigateTo('/');
-  }
-
   $: {
     movieId;
     getMovie();
@@ -65,9 +61,9 @@
   </div>
 {:else if $state.current === ComponentStateType.error}
   <div class="w-screen h-screen v-stack items-center justify-center">
-    <EmptyView description="Movie not found">
-      <RoundedButton title="Go to home" on:click={goToHome} />
-    </EmptyView>
+    <InfoMessage type={InfoMessageType.error}>
+      <LocalizedServerError serverError={$state.error} />
+    </InfoMessage>
   </div>
 {:else if $movie}
   <MovieHeader movie={$movie} on:play={handlePlay} />
