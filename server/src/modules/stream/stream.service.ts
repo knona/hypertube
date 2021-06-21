@@ -15,7 +15,7 @@ import { MovieStorageDocument, MovieStorageModel } from './movie-storage.schema'
 import { trackers } from './yts-trackers';
 import torrentStream from 'torrent-stream';
 
-interface MovieStreamInfos {
+interface MovieStream {
   magnet: string;
   size: number;
   extension: string;
@@ -70,8 +70,8 @@ export class StreamService implements OnModuleInit {
     }
   }
 
-  private streamMovieAndTranscode(res: Response, movieStreamInfos: MovieStreamInfos): void {
-    const fileSize: number = movieStreamInfos.size;
+  private streamMovieAndTranscode(res: Response, movieStream: MovieStream): void {
+    const fileSize: number = movieStream.size;
     const start: number = 0;
     const end: number = fileSize - 1;
     const chunkSize: number = end - start + 1;
@@ -79,9 +79,9 @@ export class StreamService implements OnModuleInit {
       'Content-Range': 'bytes ' + start + '-' + end + '/' + fileSize,
       'Accept-Ranges': 'bytes',
       'Content-Length': chunkSize,
-      'Content-Type': 'video/' + movieStreamInfos.extension
+      'Content-Type': 'video/' + movieStream.extension
     });
-    const stream: Readable = movieStreamInfos.createReadStream() as Readable;
+    const stream: Readable = movieStream.createReadStream() as Readable;
     ffmpeg(stream)
       .toFormat('webm')
       .videoCodec('libvpx')
@@ -89,8 +89,8 @@ export class StreamService implements OnModuleInit {
       .pipe(res);
   }
 
-  private streamMovie(res: Response, range: string, movieStreamInfos: MovieStreamInfos): void {
-    const fileSize: number = movieStreamInfos.size;
+  private streamMovie(res: Response, range: string, movieStream: MovieStream): void {
+    const fileSize: number = movieStream.size;
     const positions: string[] = range.replace(/bytes=/, '').split('-');
     const start: number = +positions[0];
     const end: number = positions[1] ? +positions[1] : fileSize - 1;
@@ -99,9 +99,9 @@ export class StreamService implements OnModuleInit {
       'Content-Range': 'bytes ' + start + '-' + end + '/' + fileSize,
       'Accept-Ranges': 'bytes',
       'Content-Length': chunkSize,
-      'Content-Type': 'video/' + movieStreamInfos.extension
+      'Content-Type': 'video/' + movieStream.extension
     });
-    const stream: Readable = movieStreamInfos.createReadStream({ start, end }) as Readable;
+    const stream: Readable = movieStream.createReadStream({ start, end }) as Readable;
     stream.pipe(res);
   }
 
@@ -132,7 +132,7 @@ export class StreamService implements OnModuleInit {
     this.engines[hash].movie = movie;
   }
 
-  private async getStreamInfos(hash: string): Promise<MovieStreamInfos> {
+  private async getMovieStream(hash: string): Promise<MovieStream> {
     hash = hash.toLowerCase();
     const magnet: string = `magnet:?xt=urn:btih:${hash}`;
     if (!this.engines[hash]) {
@@ -154,12 +154,12 @@ export class StreamService implements OnModuleInit {
 
   public async stream(req: Request, res: Response, hash: string): Promise<void> {
     const range: string = this.getRange(req);
-    const movieStreamInfos: MovieStreamInfos = await this.getStreamInfos(hash);
-    await this.upsertMovie(movieStreamInfos.magnet, movieStreamInfos.path);
-    if (this.webFormats.includes(movieStreamInfos.extension)) {
-      this.streamMovie(res, range, movieStreamInfos);
+    const movieStream: MovieStream = await this.getMovieStream(hash);
+    await this.upsertMovie(movieStream.magnet, movieStream.path);
+    if (this.webFormats.includes(movieStream.extension)) {
+      this.streamMovie(res, range, movieStream);
     } else {
-      this.streamMovieAndTranscode(res, movieStreamInfos);
+      this.streamMovieAndTranscode(res, movieStream);
     }
   }
 }
