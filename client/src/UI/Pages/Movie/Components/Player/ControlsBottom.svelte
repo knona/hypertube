@@ -16,13 +16,17 @@
   export let videoElement: HTMLVideoElement;
   export let subtitlesMenuItems: MenuItem<string | null>[];
 
-  $: if (volume !== 0) {
-    muted = false;
-  }
+  let prevVolume = volume;
 
-  $: if (volume < 0.075) {
-    muted = true;
-    volume = 0;
+  $: {
+    if (prevVolume !== volume && volume !== 0) {
+      muted = false;
+    }
+    if (prevVolume !== volume && volume < 0.075) {
+      muted = true;
+      volume = 0;
+    }
+    prevVolume = volume;
   }
 
   function stopPropagation(event: Event): void {
