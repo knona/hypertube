@@ -10,20 +10,33 @@ import { everyDayAt4h } from 'src/shared/utils/cron.utils';
 import { computeExpirationDate } from 'src/shared/utils/date.utils';
 import { getFileExtension } from 'src/shared/utils/file-extension.utils';
 import { Readable } from 'stream';
-import WebTorrent from 'webtorrent';
 import { fileStorageExpiration } from './config';
 import { MovieStorageDocument, MovieStorageModel } from './movie-storage.schema';
 import { trackers } from './yts-trackers';
+import torrentStream from 'torrent-stream';
+
+interface MovieStreamInfos {
+  magnet: string;
+  size: number;
+  extension: string;
+  path: string;
+  createReadStream: (opts?: { start: number; end: number }) => Readable;
+}
+
+type TorrentFile = TorrentStream.TorrentFile;
+type TorrentEngine = TorrentStream.TorrentEngine;
 
 @Injectable()
 export class StreamService implements OnModuleInit {
-  private client: WebTorrent.Instance = new WebTorrent();
   private moviesFolder: string = join(__dirname, '..', '..', '..', 'movies');
   private webFormats: string[] = ['mp4', 'webm'];
   private otherFormats: string[] = ['mkv'];
   private get allFormats(): string[] {
     return this.webFormats.concat(this.otherFormats);
   }
+  private engines: {
+    [hash: string]: { engine: TorrentEngine; movie: TorrentFile; ready: boolean };
+  } = {};
 
   public constructor(
     @InjectModel(MovieStorageModel.name) private readonly movieStorageModel: Model<MovieStorageDocument>
@@ -47,9 +60,6 @@ export class StreamService implements OnModuleInit {
     const movies: MovieStorageDocument[] = await this.movieStorageModel.find({ expiration: { $lte: new Date() } });
     const moviesIdToDelete: string[] = [];
     const promises: Promise<void>[] = movies.map(async movie => {
-      if (this.client.get(movie.torrentId)) {
-        this.client.remove(movie.torrentId);
-      }
       const path: string = join(this.moviesFolder, movie.path);
       await rm(path, { recursive: true, force: true });
       moviesIdToDelete.push(movie.id);
@@ -60,8 +70,8 @@ export class StreamService implements OnModuleInit {
     }
   }
 
-  private streamMovieAndTranscode(res: Response, movie: WebTorrent.TorrentFile): void {
-    const fileSize: number = movie.length;
+  private streamMovieAndTranscode(res: Response, movieStreamInfos: MovieStreamInfos): void {
+    const fileSize: number = movieStreamInfos.size;
     const start: number = 0;
     const end: number = fileSize - 1;
     const chunkSize: number = end - start + 1;
@@ -69,9 +79,9 @@ export class StreamService implements OnModuleInit {
       'Content-Range': 'bytes ' + start + '-' + end + '/' + fileSize,
       'Accept-Ranges': 'bytes',
       'Content-Length': chunkSize,
-      'Content-Type': 'video/' + getFileExtension(movie.name)
+      'Content-Type': 'video/' + movieStreamInfos.extension
     });
-    const stream: Readable = movie.createReadStream() as Readable;
+    const stream: Readable = movieStreamInfos.createReadStream() as Readable;
     ffmpeg(stream)
       .toFormat('webm')
       .videoCodec('libvpx')
@@ -79,8 +89,8 @@ export class StreamService implements OnModuleInit {
       .pipe(res);
   }
 
-  private streamMovie(res: Response, range: string, movie: WebTorrent.TorrentFile): void {
-    const fileSize: number = movie.length;
+  private streamMovie(res: Response, range: string, movieStreamInfos: MovieStreamInfos): void {
+    const fileSize: number = movieStreamInfos.size;
     const positions: string[] = range.replace(/bytes=/, '').split('-');
     const start: number = +positions[0];
     const end: number = positions[1] ? +positions[1] : fileSize - 1;
@@ -89,9 +99,9 @@ export class StreamService implements OnModuleInit {
       'Content-Range': 'bytes ' + start + '-' + end + '/' + fileSize,
       'Accept-Ranges': 'bytes',
       'Content-Length': chunkSize,
-      'Content-Type': 'video/' + getFileExtension(movie.name)
+      'Content-Type': 'video/' + movieStreamInfos.extension
     });
-    const stream: Readable = movie.createReadStream({ start, end }) as Readable;
+    const stream: Readable = movieStreamInfos.createReadStream({ start, end }) as Readable;
     stream.pipe(res);
   }
 
@@ -103,32 +113,53 @@ export class StreamService implements OnModuleInit {
     return range;
   }
 
-  private async getReadStreamFromTorrent(hash: string): Promise<WebTorrent.TorrentFile> {
-    let torrent: WebTorrent.Torrent = this.client.torrents.find(trnt => trnt.infoHash === hash.toLowerCase());
-    if (!torrent) {
-      const magnet: string = `magnet:?xt=urn:btih:${hash}&tr=` + trackers.join('&tr=');
-      torrent = await new Promise(resolve => this.client.add(magnet, { path: this.moviesFolder }, resolve));
-    } else if (!torrent.ready) {
-      await new Promise(resolve => torrent.on('ready', () => resolve(void 0)));
-    }
-    const movie: WebTorrent.TorrentFile = torrent.files.find(file =>
-      this.allFormats.includes(getFileExtension(file.name))
-    );
+  private async setMovie(hash: string): Promise<void> {
+    const engine: TorrentEngine = this.engines[hash].engine;
+    await new Promise(resolve => engine.on('ready', resolve));
+    this.engines[hash].ready = true;
+    let movie: TorrentFile;
+    engine.files.forEach(file => {
+      if (this.allFormats.includes(getFileExtension(file.name))) {
+        movie = file;
+      } else {
+        file.deselect();
+      }
+    });
     if (!movie) {
+      delete this.engines[hash];
       throw new NotFoundException('Torrent does not contain movie with a valid format');
     }
-    await this.upsertMovie(torrent.magnetURI, movie.path);
-    return movie;
+    this.engines[hash].movie = movie;
+  }
+
+  private async getStreamInfos(hash: string): Promise<MovieStreamInfos> {
+    hash = hash.toLowerCase();
+    const magnet: string = `magnet:?xt=urn:btih:${hash}`;
+    if (!this.engines[hash]) {
+      const engine: TorrentEngine = torrentStream(magnet, { trackers, uploads: 0, path: this.moviesFolder });
+      this.engines[hash] = { engine, ready: false, movie: null };
+    }
+    if (!this.engines[hash] || !this.engines[hash].ready) {
+      await this.setMovie(hash);
+    }
+    const movie: TorrentFile = this.engines[hash].movie;
+    return {
+      magnet,
+      path: movie.path,
+      size: movie.length,
+      extension: getFileExtension(movie.name),
+      createReadStream: movie.createReadStream
+    };
   }
 
   public async stream(req: Request, res: Response, hash: string): Promise<void> {
     const range: string = this.getRange(req);
-    const movie: WebTorrent.TorrentFile = await this.getReadStreamFromTorrent(hash);
-    const movieExtension: string = getFileExtension(movie.name);
-    if (this.webFormats.includes(movieExtension)) {
-      this.streamMovie(res, range, movie);
+    const movieStreamInfos: MovieStreamInfos = await this.getStreamInfos(hash);
+    await this.upsertMovie(movieStreamInfos.magnet, movieStreamInfos.path);
+    if (this.webFormats.includes(movieStreamInfos.extension)) {
+      this.streamMovie(res, range, movieStreamInfos);
     } else {
-      this.streamMovieAndTranscode(res, movie);
+      this.streamMovieAndTranscode(res, movieStreamInfos);
     }
   }
 }
