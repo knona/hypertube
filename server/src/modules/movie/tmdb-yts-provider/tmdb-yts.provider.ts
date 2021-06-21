@@ -63,7 +63,7 @@ export class TmdbYts implements MovieProvider {
 
   private ytsTorrentsToTorrents(torrents: YtsTorrent[]): Torrent[] {
     return torrents
-      .filter(torrent => torrent.quality !== '3D')
+      .filter(torrent => torrent.quality !== '3D' && torrent.quality !== '2160p')
       .map(torrent => ({
         hash: torrent.hash,
         peers: torrent.peers,
