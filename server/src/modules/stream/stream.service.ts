@@ -133,7 +133,6 @@ export class StreamService implements OnModuleInit {
   }
 
   private async getMovieStream(hash: string): Promise<MovieStream> {
-    hash = hash.toLowerCase();
     const magnet: string = `magnet:?xt=urn:btih:${hash}`;
     if (!this.engines[hash]) {
       const engine: TorrentEngine = torrentStream(magnet, { trackers, uploads: 0, path: this.moviesFolder });
@@ -154,7 +153,7 @@ export class StreamService implements OnModuleInit {
 
   public async stream(req: Request, res: Response, hash: string): Promise<void> {
     const range: string = this.getRange(req);
-    const movieStream: MovieStream = await this.getMovieStream(hash);
+    const movieStream: MovieStream = await this.getMovieStream(hash.toLowerCase());
     await this.upsertMovie(movieStream.magnet, movieStream.path);
     if (this.webFormats.includes(movieStream.extension)) {
       this.streamMovie(res, range, movieStream);
