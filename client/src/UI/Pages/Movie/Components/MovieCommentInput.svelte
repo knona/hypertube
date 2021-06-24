@@ -46,18 +46,21 @@
   </div>
 
   <div class="v-stack items-end">
-    <div class="h-stack items-center">
+    <div class="h-stack items-center space-x-2">
       <div class="opacity-0">
         <RoundedButton title="C" disabled={true} />
       </div>
-      {#if $state.current === ComponentStateType.loading}
-        <LoadingIndicator />
-      {:else if $state.current === ComponentStateType.error}
+      {#if $state.current === ComponentStateType.error}
         <InfoMessage type={InfoMessageType.error}>
           <LocalizedServerError serverError={$state.error} />
         </InfoMessage>
-      {:else if content.length > 0}
-        <RoundedButton title="Comment" on:click={comment} />
+      {/if}
+      {#if content.length > 0}
+        {#if $state.current === ComponentStateType.loading}
+          <LoadingIndicator />
+        {:else}
+          <RoundedButton title="Comment" on:click={comment} />
+        {/if}
       {/if}
     </div>
   </div>
