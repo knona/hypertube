@@ -19,6 +19,7 @@
   import FtAuthenticationPage from './Pages/FTAuthentication/FTAuthenticationPage.svelte';
   import HomePage from './Pages/Home/HomePage.svelte';
   import MoviePage from './Pages/Movie/MoviePage.svelte';
+  import PlayerPage from './Pages/Player/PlayerPage.svelte';
   import ResetPasswordPage from './Pages/ResetPassword/ResetPasswordPage.svelte';
   import SearchPage from './Pages/Search/SearchPage.svelte';
   import UpdateEmailPage from './Pages/UpdateEmail/UpdateEmailPage.svelte';
@@ -63,7 +64,7 @@
   }
 </script>
 
-{#if $currentPath !== '/'}
+{#if $currentPath !== '/' && $currentPath !== '/player'}
   <NavigationBar bind:search />
 {/if}
 
@@ -74,6 +75,9 @@
 
   <div class={`${search.length === 0 ? '' : 'overflow-hidden'}`}>
     <Router>
+      <AuthenticatedRoute path="/player" redirectUrl="/auth">
+        <PlayerPage />
+      </AuthenticatedRoute>
       <AuthenticatedRoute path="/movie/:id" redirectUrl="/auth" let:params>
         <MoviePage movieId={params.id} />
       </AuthenticatedRoute>

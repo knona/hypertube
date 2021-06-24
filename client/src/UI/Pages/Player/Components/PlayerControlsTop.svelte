@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Button from './../../../../Components/Button/Button.svelte';
-  import { IconType } from '../../../../Components/Icon/Models/IconType';
+  import Button from './../../../Components/Button/Button.svelte';
+  import { IconType } from '../../../Components/Icon/Models/IconType';
   import { createEventDispatcher } from 'svelte';
-  import type { Dispatch } from '../../../../../Shared/Types';
+  import type { Dispatch } from '../../../../Shared/Types';
 
   export let movieTitle: string;
 

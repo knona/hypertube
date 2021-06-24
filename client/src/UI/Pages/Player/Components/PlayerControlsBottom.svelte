@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { formatTime, parseTextTrackList } from '../../../../../Utils/PlayerUtils';
-  import { IconType } from '../../../../Components/Icon/Models/IconType';
-  import Button from './../../../../Components/Button/Button.svelte';
-  import type { MenuItem } from './../../../../Components/Menu/Models/MenuItem';
-  import MenuButton from './../../../../Components/MenuButton/MenuButton.svelte';
-  import { MenuButtonPosition } from './../../../../Components/MenuButton/Models/MenuButtonPosition';
-  import { MenuButtonType } from './../../../../Components/MenuButton/Models/MenuButtonType';
-  import VideoProgress from './VideoProgress.svelte';
-  import VolumeProgress from './VolumeProgress.svelte';
+  import { formatTime, parseTextTrackList } from '../../../../Utils/PlayerUtils';
+  import { IconType } from '../../../Components/Icon/Models/IconType';
+  import Button from './../../../Components/Button/Button.svelte';
+  import type { MenuItem } from './../../../Components/Menu/Models/MenuItem';
+  import MenuButton from './../../../Components/MenuButton/MenuButton.svelte';
+  import { MenuButtonPosition } from './../../../Components/MenuButton/Models/MenuButtonPosition';
+  import { MenuButtonType } from './../../../Components/MenuButton/Models/MenuButtonType';
+  import PlayerVideoProgress from './PlayerVideoProgress.svelte';
+  import PlayerVolumeProgress from './PlayerVolumeProgress.svelte';
 
   export let time: number;
   export let volume: number;
@@ -62,7 +62,7 @@
   class="absolute bottom-0 pb-5 px-5 w-full v-stack items-center bg-gradient-to-t from-black"
   on:mousedown={stopPropagation}
 >
-  <VideoProgress bind:time duration={movieRuntime} />
+  <PlayerVideoProgress bind:time duration={movieRuntime} />
   <div class="h-stack items-center justify-between w-full px-1">
     <div>
       <span class="text-sm md:text-lg text-white">{formatTime(time)}</span>
@@ -76,7 +76,7 @@
         {:else}
           <Button icon={IconType.volumeUp} on:click={handleMute} />
         {/if}
-        <VolumeProgress disabled={muted} bind:volume />
+        <PlayerVolumeProgress disabled={muted} bind:volume />
       </div>
 
       <div class="center-content player-button">

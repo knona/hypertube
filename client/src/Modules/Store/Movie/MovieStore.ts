@@ -12,7 +12,7 @@ export function movieStore(): MovieStore {
     subscribe,
     update: (updatedMovie: (movie: DetailedMovie) => DetailedMovie) =>
       update((movie: Optional<DetailedMovie>) => (movie ? updatedMovie(movie) : movie)),
-    setMovie: (movie: DetailedMovie) => set(movie),
+    setMovie: (movie: Optional<DetailedMovie>) => set(movie),
     sortedComments: () =>
       get(store)?.comments.sort((c1, c2) => new Date(c2.createdAt).getTime() - new Date(c1.createdAt).getTime()) ?? [],
     addComment: (comment: Comment) =>

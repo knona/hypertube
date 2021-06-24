@@ -304,6 +304,15 @@
       "sendBackButton": {
         "title": "Send Email Back"
       }
+    },
+    "player": {
+      "state": {
+        "error": {
+          "retryButton": {
+            "title": "Retry"
+          }
+        }
+      }
     }
   },
   "component": {

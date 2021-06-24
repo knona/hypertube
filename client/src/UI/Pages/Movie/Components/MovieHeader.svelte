@@ -134,7 +134,9 @@
         <h3 class="text-sm">{movie.overview}</h3>
 
         <div class="md:ml-4 v-stack items-start md:items-end">
-          <div class="text-sm text-secondary-text whitespace-nowrap">{$_('page.movie.components.header.released')}</div>
+          <div class="text-sm text-white opacity-40 whitespace-nowrap">
+            {$_('page.movie.components.header.released')}
+          </div>
           <div class="text-sm whitespace-nowrap">{formattedReleaseDate()}</div>
         </div>
 

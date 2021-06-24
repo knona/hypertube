@@ -4,6 +4,7 @@
   import type { ServerError } from '../../../Models/Server/Errors/ServerError';
   import type { Torrent } from '../../../Models/Torrent';
   import MovieManager from '../../../Modules/Movie/MovieManager';
+  import Navigation from '../../../Modules/Navigation/Navigation';
   import { componentState } from '../../../Modules/Store/ComponentState/ComponentStateStore';
   import { ComponentStateType } from '../../../Modules/Store/ComponentState/Models/ComponentStateType';
   import type { State } from '../../../Modules/Store/ComponentState/Models/State';
@@ -20,14 +21,11 @@
   import MovieSection from './Components/MovieSection.svelte';
   import MovieSegmentedSection from './Components/MovieSegmentedSection.svelte';
   import MovieTrailers from './Components/MovieTrailers.svelte';
-  import MoviePlayer from './Components/Player/MoviePlayer.svelte';
 
   export let movieId: string;
 
   let state: State<ServerError> = componentState({ current: ComponentStateType.loading });
   let movie: MovieStore = movieStore();
-  let isPlayerVisible: boolean = false;
-  let torrent: Torrent;
 
   function getMovie(): void {
     state.setLoading();
@@ -39,19 +37,13 @@
       .catch(state.setError);
   }
 
+  function playMovie(event: CustomEvent<Torrent>): void {
+    Navigation.navigateTo(`/player?movie=${movieId}&torrentHash=${event.detail.hash}`);
+  }
+
   $: {
     movieId;
     getMovie();
-  }
-
-  $: {
-    isPlayerVisible;
-    document.body.style.overflow = isPlayerVisible ? 'hidden' : '';
-  }
-
-  function handlePlay(event: CustomEvent<Torrent>): void {
-    torrent = event.detail;
-    isPlayerVisible = true;
   }
 </script>
 
@@ -66,7 +58,7 @@
     </InfoMessage>
   </div>
 {:else if $movie}
-  <MovieHeader movie={$movie} on:play={handlePlay} />
+  <MovieHeader movie={$movie} on:play={playMovie} />
 
   <div class="pt-8 page-padding v-stack space-y-8">
     <div class="w-full max-width space-y-8">
@@ -105,8 +97,4 @@
   </div>
 
   <Footer />
-
-  {#if isPlayerVisible}
-    <MoviePlayer bind:movie {torrent} on:close={() => (isPlayerVisible = false)} />
-  {/if}
 {/if}

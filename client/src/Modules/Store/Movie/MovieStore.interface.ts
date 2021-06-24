@@ -7,7 +7,7 @@ export interface MovieStore {
   subscribe: (this: void, run: Subscriber<Optional<DetailedMovie>>, invalidate?: any) => Unsubscriber;
   update: (updatedMovie: (movie: DetailedMovie) => DetailedMovie) => void;
   sortedComments: () => Comment[];
-  setMovie: (movie: DetailedMovie) => void;
+  setMovie: (movie: Optional<DetailedMovie>) => void;
   addComment: (comment: Comment) => void;
   removeComment: (comment: Comment) => void;
 }
