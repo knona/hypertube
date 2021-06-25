@@ -2,16 +2,17 @@
   import { onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
   import { fade } from 'svelte/transition';
-  import type { DetailedMovie } from '../../../../../Models/DetailedMovie';
-  import { Language } from '../../../../../Models/Language';
-  import type { Torrent } from '../../../../../Models/Torrent';
-  import MovieManager from '../../../../../Modules/Movie/MovieManager';
-  import type { MovieStore } from '../../../../../Modules/Store/Movie/MovieStore.interface';
-  import { token } from '../../../../../Modules/Store/Token/TokenStore';
-  import { subtitleUrl } from '../../../../../Shared/Constants';
-  import { torrentUrl } from '../../../../../Utils/TorrentUtils';
-  import type { MenuItem } from '../../../../Components/Menu/Models/MenuItem';
-  import Controls from './Controls.svelte';
+  import type { DetailedMovie } from '../../../../Models/DetailedMovie';
+  import { Language } from '../../../../Models/Language';
+  import type { Torrent } from '../../../../Models/Torrent';
+  import MovieManager from '../../../../Modules/Movie/MovieManager';
+  import Navigation from '../../../../Modules/Navigation/Navigation';
+  import type { MovieStore } from '../../../../Modules/Store/Movie/MovieStore.interface';
+  import { token } from '../../../../Modules/Store/Token/TokenStore';
+  import { subtitleUrl } from '../../../../Shared/Constants';
+  import { torrentUrl } from '../../../../Utils/TorrentUtils';
+  import type { MenuItem } from '../../../Components/Menu/Models/MenuItem';
+  import PlayerControls from './../Components/PlayerControls.svelte';
 
   export let movie: MovieStore;
   export let torrent: Torrent;
@@ -118,6 +119,10 @@
   function handleCanPlay(): void {
     loading = false;
   }
+
+  function handleClose(): void {
+    Navigation.navigateTo(`movie/${$movie?.tmdbId as number}`);
+  }
 </script>
 
 <!-- svelte-ignore a11y-media-has-caption -->
@@ -151,7 +156,7 @@
     </video>
 
     {#if displayControls || loading || paused}
-      <Controls
+      <PlayerControls
         bind:time={currentTime}
         bind:volume
         bind:muted
@@ -161,7 +166,7 @@
         movieRuntime={($movie?.runtime ?? 0) * 60}
         {subtitlesMenuItems}
         {videoElement}
-        on:close
+        on:close={handleClose}
       />
     {/if}
   </div>

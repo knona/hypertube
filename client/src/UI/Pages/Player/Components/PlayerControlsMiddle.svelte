@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Icon from '../../../../Components/Icon/Icon.svelte';
-  import { IconType } from '../../../../Components/Icon/Models/IconType';
-  import LoadingIndicator from '../../../../Components/LoadingIndicator/LoadingIndicator.svelte';
+  import Icon from '../../../Components/Icon/Icon.svelte';
+  import { IconType } from '../../../Components/Icon/Models/IconType';
+  import LoadingIndicator from '../../../Components/LoadingIndicator/LoadingIndicator.svelte';
 
   export let paused: boolean;
   export let loading: boolean;
