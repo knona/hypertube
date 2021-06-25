@@ -31,9 +31,9 @@
   function signinWithEmail(): void {
     authenticationState.setLoading();
     Authentication.signinWithEmail(firstName, lastName, username, email, password)
-      .then(() => {
+      .then((usedEmail: string) => {
         authenticationState.setDefault();
-        Navigation.navigateTo('/auth/verify');
+        Navigation.navigateTo(`/auth/verify?email=${usedEmail}`);
         return;
       })
       .catch(authenticationState.setError);

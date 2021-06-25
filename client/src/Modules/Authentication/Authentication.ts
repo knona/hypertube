@@ -30,7 +30,7 @@ async function signinWithEmail(
   username: string,
   email: string,
   password: string
-): Promise<void> {
+): Promise<string> {
   const request: Request = new Request(SIGNIN_EMAIL, {
     firstName: firstName,
     lastName: lastName,
@@ -39,6 +39,7 @@ async function signinWithEmail(
     password: password
   });
   await request.perform();
+  return email;
 }
 
 async function loginWithEmail(login: string, password: string): Promise<void> {
